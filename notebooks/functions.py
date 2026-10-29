@@ -3,7 +3,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OrdinalEncoder
-
+# khalid 
 def missing_values_table(df, select_numerical=True):
     """
     Generates a table summarizing missing values in numerical or object-type columns of a pandas DataFrame.
@@ -159,18 +159,18 @@ def fill_nan(df, select_numerical=True):
 
 
 def encode_ordinal_features(df, ordinal_encoder_feature):
-    """
-    Encodes ordinal features in a pandas DataFrame using scikit-learn's OrdinalEncoder.
+    # Convert a single column or tuple into a list
+    if isinstance(ordinal_encoder_feature, str):
+        cols = [ordinal_encoder_feature]
+    else:
+        cols = list(ordinal_encoder_feature)
 
-    Parameters:
-    - df (pd.DataFrame): The pandas DataFrame containing the features to be encoded.
-    - ordinal_encoder_feature (str or list of str): The name or names of the ordinal feature(s) to be encoded.
-
-    Returns:
-    - df (pd.DataFrame): The DataFrame with the specified ordinal feature(s) encoded.
-    """
+    # Initialise encoder
     ordinal_encoder = OrdinalEncoder()
-    df[ordinal_encoder_feature] = ordinal_encoder.fit_transform(df[[ordinal_encoder_feature]])
+
+    # Encode multiple columns 
+    df[cols] = ordinal_encoder.fit_transform(df[cols])
+
     return df
 
 
